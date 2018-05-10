@@ -6,6 +6,18 @@ This document walks you through Amazon EKS with [CoreOS ALB ingress conbtroller]
 
 ### Getting Started
 
+Attach extra IAM policy allowing all **elasticloadbalancing:*** method to the EC2 node instance role. The ingress controller will need 
+
+```
+aws iam put-role-policy --role-name <EC2_NODE_INSTANCE_ROLE> --policy-name elb-allow-all --policy-document file://elb-inline-policy.json
+```
+
+
+
+
+
+
+
 Install the default-http-backend
 
 ```bash
@@ -104,7 +116,7 @@ spec:
 find your EKS NodeSecurityGroup
 
 ```bash
-$ ec2 describe-security-groups --query "SecurityGroups[?VpcId=='vpc-e692c79f']|[?contains(GroupName, 'NodeSecurityGroup')].GroupId"
+$ aws ec2 describe-security-groups --query "SecurityGroups[?VpcId=='vpc-e692c79f']|[?contains(GroupName, 'NodeSecurityGroup')].GroupId"
 
 [
     "sg-49c86737"
@@ -116,7 +128,7 @@ $ ec2 describe-security-groups --query "SecurityGroups[?VpcId=='vpc-e692c79f']|[
 find your EKS subnets with `aws cli` :
 
 ```bash
-$ ec2 describe-subnets --query "join(',', Subnets[?VpcId=='vpc-e692c79f'].SubnetId)" --output text
+$ aws ec2 describe-subnets --query "join(',', Subnets[?VpcId=='vpc-e692c79f'].SubnetId)" --output text
 subnet-eb16cba0,subnet-7ef24007
 ```
 
