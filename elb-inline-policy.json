@@ -6,6 +6,11 @@
             "Effect": "Allow",
             "Action": "elasticloadbalancing:*",
             "Resource": "*"
+        },
+        {
+            "Effect" : "Allow",
+            "Action" : "tag:GetResources",
+            "Resource" : "*"
         }
     ]
 }
