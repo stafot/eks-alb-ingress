@@ -9,7 +9,7 @@ This document walks you through Amazon EKS with [CoreOS ALB ingress conbtroller]
 Attach extra IAM policy allowing all **elasticloadbalancing:*** method to the EC2 node instance role. The ingress controller will need 
 
 ```
-aws iam put-role-policy --role-name <EC2_NODE_INSTANCE_ROLE> --policy-name elb-allow-all --policy-document file://elb-inline-policy.json
+aws iam put-role-policy --role-name <EC2_NODE_INSTANCE_ROLE> --policy-name alb-allow --policy-document file://alb-inline-iam-policy.json
 ```
 
 
